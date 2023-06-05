@@ -1,25 +1,24 @@
-import { Component } from 'react';
-import Searchbar from './Searchbar/Searchbar';
-import ImageGallery from './ImageGallery/ImageGallery';
+import { Searchbar } from "./Searchbar/Searchbar";
+import { ImageGallery } from "./ImageGallery/ImageGallery";
+import { useState, useEffect } from "react";
 
-export class App extends Component {
-  state = {
-    searchImage: '',
-  };
+export const App =()=> {
+  const [search, setSearch] = useState('');
 
-  handleFormSubmit = searchImage => {
-    this.setState({ searchImage });
-  };
+const handleSearch = (value)=>{
+setSearch(value)
+}
 
-  render() {
-    const { searchImage } = this.state;
+useEffect(()=>{
+  setSearch('')
+},[])
     return (
       <div className="App">
-        <Searchbar onSubmit={this.handleFormSubmit} />
-        <ImageGallery searchImage={searchImage} />
+        <Searchbar handleSearch={handleSearch}/>
+        <ImageGallery search={search}/>
       </div>
     );
   }
-}
 
 export default App;
+
